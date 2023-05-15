@@ -10,7 +10,8 @@ CREATE TABLE tblEmployee
 	EmployeeName VARCHAR(80),
 	DepartmentId INT,
 	Experience INT,
-	Salary MONEY CHECK (Salary > 0)
+	Salary MONEY CHECK (Salary > 0),
+	Foreign key (DepartmentId) References tblDepartment (DepartmentId)
 )
 
 INSERT INTO tblDepartment VALUES
@@ -35,7 +36,7 @@ FROM tblDepartment AS D INNER JOIN tblEmployee AS E
 ON D.DepartmentId = E.DepartmentId
 
 --Write a Query to display department wise employee count
-SELECT D.DepartmentName AS Department, COUNT(D.DepartmentName) AS 'Total Employee'
+SELECT D.DepartmentName AS Department, COUNT(*) AS 'Total Employee'
 FROM tblDepartment AS D INNER JOIN tblEmployee AS E
 ON D.DepartmentId = E.DepartmentId
 GROUP BY DepartmentName
